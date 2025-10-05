@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { WatchlistProvider } from './contexts/WatchlistContext';
 import Header from './components/Header.jsx';
-import Footer from './components/Footer';
+
 import Home from './pages/Home';
 import Watchlist from './pages/Watchlist';
 import Login from './pages/Login';
@@ -25,7 +25,7 @@ export default function App() {
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
-            <Footer />
+          
           </div>
         </WatchlistProvider>
       </AuthProvider>
