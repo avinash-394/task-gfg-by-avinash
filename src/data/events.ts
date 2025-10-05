@@ -1,10 +1,5 @@
 type EventOrganizer = 'CC' | 'GFG' | 'GDSC';
 
-interface Image {
-  src: string;
-  alt: string;
-}
-
 const EVENTS = [
   {
     id: '1',
@@ -56,7 +51,7 @@ const EVENTS = [
     category: 'Workshop',
     organizer: 'GDSC' as EventOrganizer
   },
-] as const;
+] as unknown as Array<any>;
 
 export const CATEGORIES = [
   'Competitive Programming',

@@ -1,3 +1,4 @@
+
 export type EventCategory = typeof import('./data/events').CATEGORIES[number];
 export type EventOrganizer = 'CC' | 'GFG' | 'GDSC';
 

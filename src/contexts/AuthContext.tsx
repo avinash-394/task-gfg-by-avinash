@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [user]);
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string) => {
     // In a real app, this would make an API call
     const mockUser: User = {
       id: '1',
@@ -49,7 +49,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(mockUser);
   };
 
-  const signup = async (email: string, password: string, name: string) => {
+  const signup = async (email: string, name: string) => {
     // In a real app, this would make an API call
     const mockUser: User = {
       id: Date.now().toString(),

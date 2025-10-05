@@ -21,22 +21,22 @@ export default function Home() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col sm:flex-row justify-between items-start gap-6 mb-8">
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              Upcoming Events
-            </h1>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">
-              Discover and join exciting tech events
-            </p>
-          </div>
+    <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <header className="mb-10">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white mb-2 tracking-tight">Upcoming Events</h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400">Discover and join exciting tech events</p>
+        </header>
+
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 mb-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <label htmlFor="category" className="sr-only">Category</label>
             <select
+              id="category"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              aria-label="Filter by category"
             >
               <option value="all">All Categories</option>
               {CATEGORIES.map((category) => (
@@ -45,10 +45,13 @@ export default function Home() {
                 </option>
               ))}
             </select>
+            <label htmlFor="sort" className="sr-only">Sort</label>
             <select
+              id="sort"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'date' | 'title')}
-              className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              aria-label="Sort events"
             >
               <option value="date">Sort by Date</option>
               <option value="title">Sort by Title</option>
@@ -56,7 +59,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <section aria-label="Event list" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
           {sortedEvents.map((event) => (
             <EventCard
               key={event.id}
@@ -64,7 +67,7 @@ export default function Home() {
               onClick={() => setSelectedEvent(event)}
             />
           ))}
-        </div>
+        </section>
 
         {selectedEvent && (
           <Modal
@@ -73,7 +76,7 @@ export default function Home() {
             onClose={() => setSelectedEvent(null)}
           />
         )}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
