@@ -23,7 +23,7 @@ export default function EventCard({ event, onClick }: EventCardProps) {
       <div className="poster relative w-full flex items-center justify-center bg-[#111827] p-1" style={{ minHeight: '180px', minWidth: '100px' }}>
         {/* Rating badge - ensure it is inside the poster and at top-left */}
         {event.rating !== undefined && (
-          <span style={{position:'absolute',top:'8px',left:'8px',zIndex:2}} className="px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 bg-primary-500/90 text-white backdrop-blur-sm shadow">
+          <span style={{position:'absolute',top:'8px',left:'8px',zIndex:2}} className="rating-badge px-2.5 py-1 text-xs font-semibold flex items-center gap-1 backdrop-blur-sm">
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L24 9.588l-6 5.848 1.42 8.283L12 18.896l-7.42 4.823L6 15.436 0 9.588l8.332-1.57z"/></svg>
             {event.rating.toFixed(1)}
           </span>
