@@ -1,7 +1,2 @@
-/* Reset root styles */
-#root {
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
+/* Moved root sizing styles to global.css */
+/* This file can be deleted if not imported elsewhere */

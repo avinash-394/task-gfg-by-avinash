@@ -7,61 +7,60 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, onClick }: EventCardProps) {
-  const [imageError, setImageError] = useState(false);
+  const [error, setError] = useState(false);
   const year = new Date(event.date).getFullYear();
 
-  const handleImageError = () => {
-    setImageError(true);
-  };
-
   return (
-    <div
-      className="group relative flex flex-col text-center bg-card rounded-2xl overflow-hidden transition-all duration-300 ease-in-out hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2"
-      style={{
-        backgroundImage: 'linear-gradient(45deg, hsl(var(--border)/0.2) 25%, transparent 25%), linear-gradient(-45deg, hsl(var(--border)/0.2) 25%, transparent 25%)',
-        backgroundSize: '20px 20px',
-      }}
+    <article
+      className="event-card card-base relative flex flex-col overflow-hidden group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/70 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-[#0d1220] mx-auto"
       onClick={onClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
       aria-label={`View details for ${event.title}`}
     >
-      {/* Poster area */}
-      <div className="relative p-4 flex-grow flex flex-col items-center">
-        <figure className="relative w-32 h-32 mx-auto mb-6">
-          <div className="relative w-full h-full max-w-[128px] max-h-[128px] rounded-full border-4 border-primary/30 shadow-lg flex-shrink-0 overflow-hidden transition-all duration-300 group-hover:border-primary group-hover:scale-105">
-            {imageError ? (
-              <div className="w-full h-full bg-primary/20 flex items-center justify-center font-montserrat text-4xl font-bold text-primary">
-                {event.title[0]}
-              </div>
-            ) : (
-              <img
-                src={event.images[0]}
-                alt={event.title}
-                className="w-full h-full object-cover object-top"
-                loading="lazy"
-                onError={handleImageError}
-              />
-            )}
+      {/* Poster */}
+      <div className="poster relative w-full flex items-center justify-center bg-[#111827] p-1" style={{ minHeight: '180px', minWidth: '100px' }}>
+        {/* Rating badge - ensure it is inside the poster and at top-left */}
+        {event.rating !== undefined && (
+          <span style={{position:'absolute',top:'8px',left:'8px',zIndex:2}} className="px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 bg-primary-500/90 text-white backdrop-blur-sm shadow">
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.431L24 9.588l-6 5.848 1.42 8.283L12 18.896l-7.42 4.823L6 15.436 0 9.588l8.332-1.57z"/></svg>
+            {event.rating.toFixed(1)}
+          </span>
+        )}
+        {!error ? (
+          <img
+            src={event.images[0]}
+            alt={event.title}
+            loading="lazy"
+            onError={() => setError(true)}
+            className="max-w-full max-h-full object-contain block"
+            style={{ display: 'block', margin: 'auto' }}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-500/30 to-primary-700/30 text-primary-100 text-lg font-semibold min-h-[180px]">
+            {event.title.slice(0, 10)}
           </div>
-        </figure>
-
-        <div className="flex-grow flex flex-col justify-center">
-          <h2 className="font-montserrat text-xl font-bold text-foreground">
-            {event.title}
-          </h2>
-          <p className="text-primary font-semibold mt-1">
-            Release: {year}
-          </p>
-          <p className="text-muted-foreground text-xs mt-3 italic min-h-[2.5rem] px-2">
-            "{event.shortDescription}"
-          </p>
-        </div>
+        )}
+        {/* Favorite placeholder */}
+        <button
+          onClick={(e) => { e.stopPropagation(); /* TODO: implement favorite */ }}
+          aria-label="Toggle favorite"
+          className="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/40 hover:bg-black/60 text-white grid place-items-center transition"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z" /></svg>
+        </button>
       </div>
 
-      {/* Hover effect */}
-      <div className="w-0 h-1 bg-primary group-hover:w-full transition-all duration-500 ease-out mx-auto"></div>
-    </div>
+      {/* Content */}
+      <div className="flex flex-col gap-2 p-3">
+        <h3 className="text-sm sm:text-base font-semibold text-white line-clamp-1" title={event.title}>{event.title}</h3>
+        <p className="text-[11px] sm:text-xs text-gray-300 line-clamp-2 min-h-[2.25rem]">{event.shortDescription}</p>
+        <div className="flex items-center justify-between pt-1">
+          <span className="text-[11px] sm:text-xs text-gray-400">{year}</span>
+          <span className="text-[10px] px-2 py-0.5 rounded bg-primary-500/15 text-primary-300 tracking-wide font-medium line-clamp-1 max-w-[60%] text-right">{event.category}</span>
+        </div>
+      </div>
+    </article>
   );
 }

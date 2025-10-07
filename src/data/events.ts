@@ -7,7 +7,7 @@ const EVENTS = [
     date: '2024-11-18',
     description: 'Face coding tasks and compete to earn points for your \"House\" and claim the Hogwarts Coding Cup! Whether you\'re a Gryffindor, Hufflepuff, Ravenclaw, or Slytherin – show your skills and prove your coding prowess! Sharpen your wands (and your coding skills) and get ready to cast some spells on your keyboards!',
     shortDescription: 'A Hogwarts-themed coding competition where houses compete for the Coding Cup.',
-    images: ['/logo.png'],
+    images: ['/coccc.png'],
     category: 'Competitive Programming',
     organizer: 'CC' as EventOrganizer,
     rating: 9.2
