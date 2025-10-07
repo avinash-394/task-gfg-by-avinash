@@ -11,6 +11,7 @@ export interface Event {
   images: string[];
   category: EventCategory;
   organizer: EventOrganizer;
+  rating?: number;
 }
 
 export interface User {

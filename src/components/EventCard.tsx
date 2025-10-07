@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Event } from '../types';
 
 interface EventCardProps {
@@ -6,60 +7,61 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, onClick }: EventCardProps) {
+  const [imageError, setImageError] = useState(false);
+  const year = new Date(event.date).getFullYear();
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   return (
     <div
-      className="flex flex-col bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer overflow-hidden focus:outline-none focus:ring-2 focus:ring-purple-500"
+      className="group relative flex flex-col text-center bg-card rounded-2xl overflow-hidden transition-all duration-300 ease-in-out hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2"
+      style={{
+        backgroundImage: 'linear-gradient(45deg, hsl(var(--border)/0.2) 25%, transparent 25%), linear-gradient(-45deg, hsl(var(--border)/0.2) 25%, transparent 25%)',
+        backgroundSize: '20px 20px',
+      }}
       onClick={onClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
       aria-label={`View details for ${event.title}`}
     >
-      <div className="relative w-full max-w-full aspect-video bg-gray-200 dark:bg-gray-700 rounded-t-lg overflow-hidden flex items-center justify-center">
-        <img
-          src={event.images[0]}
-          alt={event.title}
-          className="w-full h-full object-cover max-h-48 sm:max-h-56 md:max-h-64 lg:max-h-72 xl:max-h-80 rounded-t-lg transition-transform duration-300 hover:scale-105"
-          loading="lazy"
-        />
-        <div className="absolute top-2 right-2">
-          <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100 rounded-full text-sm font-medium backdrop-blur-sm bg-opacity-90">
-            {event.category}
-          </span>
+      {/* Poster area */}
+      <div className="relative p-4 flex-grow flex flex-col items-center">
+        <figure className="relative w-32 h-32 mx-auto mb-6">
+          <div className="relative w-full h-full max-w-[128px] max-h-[128px] rounded-full border-4 border-primary/30 shadow-lg flex-shrink-0 overflow-hidden transition-all duration-300 group-hover:border-primary group-hover:scale-105">
+            {imageError ? (
+              <div className="w-full h-full bg-primary/20 flex items-center justify-center font-montserrat text-4xl font-bold text-primary">
+                {event.title[0]}
+              </div>
+            ) : (
+              <img
+                src={event.images[0]}
+                alt={event.title}
+                className="w-full h-full object-cover object-top"
+                loading="lazy"
+                onError={handleImageError}
+              />
+            )}
+          </div>
+        </figure>
+
+        <div className="flex-grow flex flex-col justify-center">
+          <h2 className="font-montserrat text-xl font-bold text-foreground">
+            {event.title}
+          </h2>
+          <p className="text-primary font-semibold mt-1">
+            Release: {year}
+          </p>
+          <p className="text-muted-foreground text-xs mt-3 italic min-h-[2.5rem] px-2">
+            "{event.shortDescription}"
+          </p>
         </div>
       </div>
 
-      <div className="p-4 flex-grow flex flex-col">
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-1">
-          {event.title}
-        </h3>
-        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2 mb-4 flex-grow">
-          {event.shortDescription}
-        </p>
-      </div>
-
-      <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-        <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
-          <svg
-            className="w-5 h-5 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-            />
-          </svg>
-          {new Date(event.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
-        </div>
-      </div>
+      {/* Hover effect */}
+      <div className="w-0 h-1 bg-primary group-hover:w-full transition-all duration-500 ease-out mx-auto"></div>
     </div>
   );
 }

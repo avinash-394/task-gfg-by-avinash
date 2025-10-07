@@ -7,9 +7,10 @@ const EVENTS = [
     date: '2024-11-18',
     description: 'Face coding tasks and compete to earn points for your \"House\" and claim the Hogwarts Coding Cup! Whether you\'re a Gryffindor, Hufflepuff, Ravenclaw, or Slytherin – show your skills and prove your coding prowess! Sharpen your wands (and your coding skills) and get ready to cast some spells on your keyboards!',
     shortDescription: 'A Hogwarts-themed coding competition where houses compete for the Coding Cup.',
-    images: ['https://i.ibb.co/nqm4Fkjw/Slice-2.png'],
+    images: ['/logo.png'],
     category: 'Competitive Programming',
-    organizer: 'CC' as EventOrganizer
+    organizer: 'CC' as EventOrganizer,
+    rating: 9.2
   },
   {
     id: '2',
@@ -19,7 +20,8 @@ const EVENTS = [
     shortDescription: 'Master Git and GitHub in this hands-on workshop.',
     images: ['https://i.ibb.co/KGLr01J/pull-n-merge.png'],
     category: 'Workshop',
-    organizer: 'GFG' as EventOrganizer
+    organizer: 'GFG' as EventOrganizer,
+    rating: 8.6
   },
   {
     id: '3',
@@ -29,7 +31,8 @@ const EVENTS = [
     shortDescription: 'Web3 hackathon exploring decentralized technologies.',
     images: ['https://i.ibb.co/94xwZc1/Aurora.jpg'],
     category: 'Hackathon',
-    organizer: 'GFG' as EventOrganizer
+    organizer: 'GFG' as EventOrganizer,
+    rating: 8.9
   },
   {
     id: '4',
@@ -39,7 +42,8 @@ const EVENTS = [
     shortDescription: 'Deep dive into Rust programming language.',
     images: ['https://i.ibb.co/PT5S9LW/Whats-App-Image-2024-07-04-at-23-32-37-f248b4f9.jpg'],
     category: 'Workshop',
-    organizer: 'CC' as EventOrganizer
+    organizer: 'CC' as EventOrganizer,
+    rating: 8.1
   },
   {
     id: '5',
@@ -49,7 +53,8 @@ const EVENTS = [
     shortDescription: 'Two-day event combining Git essentials and Solana development.',
     images: ['https://i.ibb.co/p33ZhGk/Branch-Beyond.jpg'],
     category: 'Workshop',
-    organizer: 'GDSC' as EventOrganizer
+    organizer: 'GDSC' as EventOrganizer,
+    rating: 8.4
   },
 ] as unknown as Array<any>;
 
